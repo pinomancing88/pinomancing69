@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pino Mancing - Portal Umpan Jitu & Piranti Pemancingan Indonesia</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0B132B',
+                            card: '#1C2541',
+                            accent: '#00F5D4',
+                            amber: '#FF9F1C',
+                            blue: '#3A86FF'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(28, 37, 65, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-nav {
+            background: rgba(11, 19, 43, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #00F5D4 0%, #3A86FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-amber {
+            background: linear-gradient(135deg, #FF9F1C 0%, #FFD166 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-slate-200 font-sans antialiased selection:bg-brand-accent selection:text-brand-dark min-h-screen flex flex-col">
+
+    <!-- NAVBAR -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="https://png.pngtree.com/png-clipart/20240521/original/pngtree-angler-fishing-logo-png-image_15146827.png" alt="Logo Pino Mancing" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1C2541/00F5D4?text=PINO';" class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl object-cover border border-brand-accent/40 shadow-lg shadow-brand-accent/20 group-hover:scale-105 transition-transform">
+                <div class="flex flex-col">
+                    <span class="font-heading font-extrabold text-xl sm:text-2xl tracking-tight text-white group-hover:text-brand-accent transition-colors">PINO MANCING</span>
+                    <span class="text-[10px] tracking-widest text-brand-accent/80 font-mono uppercase font-semibold">TKJ Platform v2.4</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#umpan" class="text-slate-300 hover:text-brand-accent transition-colors">Resep Umpan</a>
+                <a href="#tips" class="text-slate-300 hover:text-brand-accent transition-colors">Tips & Trik</a>
+                <a href="#piranti" class="text-slate-300 hover:text-brand-accent transition-colors">Review Piranti</a>
+                <a href="#toko" class="text-slate-300 hover:text-brand-accent transition-colors">Katalog Piranti</a>
+                <a href="#sosmed" class="text-slate-300 hover:text-brand-accent transition-colors">Sosmed</a>
+                <a href="#tkj-spec" class="text-slate-300 hover:text-brand-accent transition-colors">Tech Specs</a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="#toko" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-accent to-brand-blue text-brand-dark font-bold text-sm hover:shadow-lg hover:shadow-brand-accent/25 hover:scale-105 active:scale-95 transition-all">
+                    <i class="fa-solid fa-cart-shopping mr-2"></i> Belanja Piranti
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="menuBtn" class="md:hidden p-2.5 rounded-xl bg-slate-800/80 text-slate-200 hover:text-white hover:bg-slate-700 focus:outline-none">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-brand-dark/95 backdrop-blur-xl px-4 pt-4 pb-6 space-y-3">
+            <a href="#umpan" class="block py-2 text-slate-300 hover:text-brand-accent font-medium">Resep Umpan</a>
+            <a href="#tips" class="block py-2 text-slate-300 hover:text-brand-accent font-medium">Tips & Trik</a>
+            <a href="#piranti" class="block py-2 text-slate-300 hover:text-brand-accent font-medium">Review Piranti</a>
+            <a href="#toko" class="block py-2 text-slate-300 hover:text-brand-accent font-medium">Katalog Piranti</a>
+            <a href="#sosmed" class="block py-2 text-slate-300 hover:text-brand-accent font-medium">Sosmed</a>
+            <a href="#tkj-spec" class="block py-2 text-slate-300 hover:text-brand-accent font-medium">Tech Specs</a>
+            <a href="#toko" class="inline-block w-full text-center py-3 rounded-xl bg-gradient-to-r from-brand-accent to-brand-blue text-brand-dark font-bold text-sm">
+                <i class="fa-solid fa-cart-shopping mr-2"></i> Belanja Piranti
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden">
+        <!-- Ambient Glow Elements -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-accent/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute top-1/3 right-10 w-[350px] h-[350px] bg-brand-blue/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-brand-accent text-xs font-semibold mb-6 border border-brand-accent/30 animate-pulse">
+                <i class="fa-solid fa-certificate"></i> Portal & Katalog Pemancingan Terpadu Indonesia
+            </div>
+            
+            <h1 class="font-heading font-extrabold text-4xl sm:text-6xl lg:text-7xl text-white tracking-tight max-w-4xl mx-auto leading-tight">
+                Satu Lapak, Ribuan Trik & <span class="text-gradient">Piranti Pemancing Juara</span>
+            </h1>
+            
+            <p class="mt-6 text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+                Temukan racikan umpan jitu teruji, tips rahasia galatama, serta katalog essen, joran, dan reel kualitas terbaik untuk mendominasi setiap perlombaan.
+            </p>
+
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#umpan" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-accent to-brand-blue text-brand-dark font-extrabold text-base shadow-xl shadow-brand-accent/20 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-bowl-food"></i> Lihat Resep Umpan
+                </a>
+                <a href="#toko" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card text-white hover:text-brand-accent font-bold text-base hover:border-brand-accent/40 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-store"></i> Buka Katalog Produk
+                </a>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="glass-card p-4 rounded-2xl">
+                    <span class="block font-heading font-extrabold text-2xl text-brand-accent">100%</span>
+                    <span class="text-xs text-slate-400">Teruji Lapak Galatama</span>
+                </div>
+                <div class="glass-card p-4 rounded-2xl">
+                    <span class="block font-heading font-extrabold text-2xl text-brand-amber">50+</span>
+                    <span class="text-xs text-slate-400">Racikan Umpan Jitu</span>
+                </div>
+                <div class="glass-card p-4 rounded-2xl">
+                    <span class="block font-heading font-extrabold text-2xl text-brand-blue">15+</span>
+                    <span class="text-xs text-slate-400">Piranti Pilihan Pro</span>
+                </div>
+                <div class="glass-card p-4 rounded-2xl">
+                    <span class="block font-heading font-extrabold text-2xl text-emerald-400">&lt; 1s</span>
+                    <span class="text-xs text-slate-400">Speed Optimized TKJ</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESEP UMPAN SECTION -->
+    <section id="umpan" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-accent text-xs font-bold tracking-widest uppercase">Formulasi Teruji</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-white mt-1">Resep & Formulasi Umpan Jitu</h2>
+                <p class="text-slate-400 text-sm mt-2">Pilih jenis target ikan di bawah ini untuk melihat racikan dan langkah pembuatan secara presisi.</p>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="flex flex-wrap justify-center gap-3 mb-8">
+                <button id="tab-mas" onclick="switchTab('mas')" class="tab-btn active px-6 py-3 rounded-xl font-bold text-xs sm:text-sm glass-card border-brand-accent text-brand-accent shadow-lg transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-fish"></i> Ikan Mas
+                </button>
+                <button id="tab-lele" onclick="switchTab('lele')" class="tab-btn px-6 py-3 rounded-xl font-bold text-xs sm:text-sm glass-card text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-water-ladder"></i> Lele
+                </button>
+                <button id="tab-bawal" onclick="switchTab('bawal')" class="tab-btn px-6 py-3 rounded-xl font-bold text-xs sm:text-sm glass-card text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-shield-cat"></i> Bawal
+                </button>
+                <button id="tab-patin" onclick="switchTab('patin')" class="tab-btn px-6 py-3 rounded-xl font-bold text-xs sm:text-sm glass-card text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-waves"></i> Patin
+                </button>
+            </div>
+
+            <!-- Interactive Content Container -->
+            <div id="recipe-content" class="glass-card p-6 sm:p-8 rounded-3xl transition-all duration-300 border border-brand-accent/20">
+                <!-- JS will populate this -->
+            </div>
+        </div>
+    </section>
+
+    <!-- TIPS & TRIK SECTION -->
+    <section id="tips" class="py-20 bg-slate-900/50 border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-brand-amber text-xs font-bold tracking-widest uppercase">Edukasi & Strategi</span>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold text-white mt-1">Tips & Trik Memancing Pro</h2>
+                </div>
+                <p class="text-slate-400 max-w-md mt-2 md:mt-0 text-sm">Penguasaan teknik dasar hingga strategi membaca kolam untuk memaksimalkan hasil tangkapan.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Tip Card 1 -->
+                <div class="glass-card p-6 rounded-2xl hover:border-brand-accent/40 transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-accent/10 text-brand-accent flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-compass"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg text-white mb-2">Membaca Lapak & Arus Air</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Perhatikan sirkulasi gemericik kincir air atau blower. Ikan induk cenderung berada di area dengan kadar oksigen tinggi dan kedalaman dasar terendah.
+                    </p>
+                </div>
+
+                <!-- Tip Card 2 -->
+                <div class="glass-card p-6 rounded-2xl hover:border-brand-amber/40 transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-amber/10 text-brand-amber flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-moon"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg text-white mb-2">Taktik Galatama Malam Hari</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Saat malam hari, gunakan umpan berkadar amis dan gurih lebih kuat dengan penetrasi aroma tajam (seperti Essen Darah Salmon atau Hati).
+                    </p>
+                </div>
+
+                <!-- Tip Card 3 -->
+                <div class="glass-card p-6 rounded-2xl hover:border-brand-blue/40 transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-blue/10 text-brand-blue flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg text-white mb-2">Perawatan Piranti Pasca Mancing</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Selalu bilas spool reel dan joran dengan air tawar bersih setelah memancing di kolam bergaram/air payau agar bearing tidak cepat berkarat.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEW PIRANTI SECTION -->
+    <section id="piranti" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-blue text-xs font-bold tracking-widest uppercase">Panduan Pemilihan Alat</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-white mt-1">Review & Panduan Piranti</h2>
+                <p class="text-slate-400 text-sm mt-2">Pahami kriteria perangkat sebelum membeli agar performa memancing Anda maksimal.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Review Box 1 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-800 flex flex-col sm:flex-row gap-5 items-center">
+                    <div class="w-20 h-20 shrink-0 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-3xl">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] uppercase font-mono font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded">Joran: Carbon vs Fiberglass</span>
+                        <h3 class="font-heading font-bold text-white text-base mt-1 mb-2">Mana yang Cocok untuk Anda?</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Joran Carbon menawarkan sensasi ringan dan sensitivitas tinggi saat gentak ikan, sangat pas untuk casting dan galatama mas. Fiberglass lebih lentur dan ulet menahan beban berat.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Review Box 2 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-800 flex flex-col sm:flex-row gap-5 items-center">
+                    <div class="w-20 h-20 shrink-0 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-3xl">
+                        <i class="fa-solid fa-compact-disc"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] uppercase font-mono font-bold text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded">Reel: Spinning vs Baitcasting</span>
+                        <h3 class="font-heading font-bold text-white text-base mt-1 mb-2">Memilih Sesuai Teknik Mancing</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Reel Spinning lebih serbaguna dan mudah digunakan pemula tanpa risiko 'backlash'. Reel Baitcasting (BC) menawarkan akurasi lemparan tinggi dan kecepatan retreive cepat.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KATALOG PRODUK / ESSEN & PIRANTI SECTION -->
+    <section id="toko" class="py-20 relative bg-slate-900/40 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                <div>
+                    <span class="text-brand-amber text-xs font-bold tracking-widest uppercase">Official Store</span>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold text-white mt-1">Essen, Joran, Reel & Piranti Pilihan</h2>
+                </div>
+                <p class="text-slate-400 max-w-md mt-2 md:mt-0 text-sm">Peralatan pancing teruji dan berkualitas tinggi untuk menunjang performa Anda di setiap lapak.</p>
+            </div>
+
+            <!-- Filter Categories -->
+            <div class="flex flex-wrap items-center gap-2 mb-10">
+                <button onclick="filterProducts('all', event)" class="prod-tab-btn active px-5 py-2.5 rounded-xl font-bold text-xs bg-brand-accent text-brand-dark shadow-lg transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-border-all"></i> Semua Produk
+                </button>
+                <button onclick="filterProducts('essen', event)" class="prod-tab-btn px-5 py-2.5 rounded-xl font-bold text-xs bg-slate-800 text-slate-300 hover:text-white transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-vial"></i> Essen Oplosan
+                </button>
+                <button onclick="filterProducts('joran', event)" class="prod-tab-btn px-5 py-2.5 rounded-xl font-bold text-xs bg-slate-800 text-slate-300 hover:text-white transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Joran Pancing
+                </button>
+                <button onclick="filterProducts('reel', event)" class="prod-tab-btn px-5 py-2.5 rounded-xl font-bold text-xs bg-slate-800 text-slate-300 hover:text-white transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-compact-disc"></i> Reel Spinning & BC
+                </button>
+                <button onclick="filterProducts('aksesori', event)" class="prod-tab-btn px-5 py-2.5 rounded-xl font-bold text-xs bg-slate-800 text-slate-300 hover:text-white transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-toolbox"></i> Aksesori & Paket
+                </button>
+            </div>
+
+            <!-- Product Grid -->
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Product 1: Essen -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-brand-accent/50 transition-all duration-300" data-category="essen">
+                    <div class="h-52 bg-slate-900 relative flex items-center justify-center overflow-hidden">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAR5PzGsEfafjlF3vCh0wUgrmFX-dSioBHfDG9_CeARg&s=10" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1C2541/00F5D4?text=Essen+Amis+Gurih';" alt="Essen Oplosan Pino Aroma Amis Gurih" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent pointer-events-none"></div>
+                        <span class="absolute top-3 right-3 bg-brand-amber text-brand-dark text-xs font-bold px-2.5 py-1 rounded-full z-10">BEST SELLER</span>
+                        <span class="absolute top-3 left-3 bg-slate-800/90 text-brand-accent text-[10px] font-mono px-2 py-0.5 rounded border border-brand-accent/30 z-10 backdrop-blur-sm">Essen</span>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <div class="flex items-center gap-1 text-amber-400 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="text-slate-400 ml-1">(4.9)</span>
+                        </div>
+                        <h3 class="font-heading font-bold text-lg text-white group-hover:text-brand-accent transition-colors">Essen Oplosan Pino "Aroma Amis Gurih"</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Diformulasikan khusus untuk lomba Harian & Galatama Ikan Mas. Sangat disukai ikan rame & induk.</p>
+                        <div class="pt-2 flex items-center justify-between border-t border-slate-800">
+                            <div>
+                                <span class="text-xs text-slate-500 block">Harga</span>
+                                <span class="font-heading font-bold text-lg text-brand-accent">Rp 85.000</span>
+                            </div>
+                            <button onclick="orderWA('Essen Oplosan Aroma Amis Gurih')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-brand-accent hover:text-brand-dark text-white font-semibold text-xs transition-all flex items-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2: Essen -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-brand-accent/50 transition-all duration-300" data-category="essen">
+                    <div class="h-52 bg-slate-900 relative flex items-center justify-center overflow-hidden">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx-kFBMKcZq78LGLO4WU4vCNxEv8BfTSr6I3zpjBMYgg&s=10" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1C2541/3A86FF?text=Essen+Darah+Salmon';" alt="Essen Oplosan Darah Salmon Extrak" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent pointer-events-none"></div>
+                        <span class="absolute top-3 right-3 bg-brand-blue text-white text-xs font-bold px-2.5 py-1 rounded-full z-10">SPECIAL LELE</span>
+                        <span class="absolute top-3 left-3 bg-slate-800/90 text-brand-accent text-[10px] font-mono px-2 py-0.5 rounded border border-brand-accent/30 z-10 backdrop-blur-sm">Essen</span>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <div class="flex items-center gap-1 text-amber-400 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="text-slate-400 ml-1">(5.0)</span>
+                        </div>
+                        <h3 class="font-heading font-bold text-lg text-white group-hover:text-brand-accent transition-colors">Essen Oplosan "Darah Salmon Extrak"</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Spesialis Galatama Lele malam hari. Aroma tajam tahan lama di air deras maupun tenang.</p>
+                        <div class="pt-2 flex items-center justify-between border-t border-slate-800">
+                            <div>
+                                <span class="text-xs text-slate-500 block">Harga</span>
+                                <span class="font-heading font-bold text-lg text-brand-accent">Rp 95.000</span>
+                            </div>
+                            <button onclick="orderWA('Essen Darah Salmon Extrak')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-brand-accent hover:text-brand-dark text-white font-semibold text-xs transition-all flex items-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3: Joran -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-brand-accent/50 transition-all duration-300" data-category="joran">
+                    <div class="h-52 bg-slate-900 relative flex items-center justify-center overflow-hidden">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgVDx6Smb_pxDujwm1Q-5c0WKLfEqVvetT6m1r78v57w&s=10" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1C2541/00F5D4?text=Joran+Carbon+180cm';" alt="Joran Pino Rod Pro Carbon" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent pointer-events-none"></div>
+                        <span class="absolute top-3 right-3 bg-cyan-500 text-brand-dark text-xs font-bold px-2.5 py-1 rounded-full z-10">CARBON HOLLOW</span>
+                        <span class="absolute top-3 left-3 bg-slate-800/90 text-brand-accent text-[10px] font-mono px-2 py-0.5 rounded border border-brand-accent/30 z-10 backdrop-blur-sm">Joran</span>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <div class="flex items-center gap-1 text-amber-400 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="text-slate-400 ml-1">(4.9)</span>
+                        </div>
+                        <h3 class="font-heading font-bold text-lg text-white group-hover:text-brand-accent transition-colors">Joran Pino Rod Pro Carbon 180cm UL</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Joran berbahan Full High Carbon Fiber, lentur dan kuat menahan beban hingga 12kg. Cocok untuk casting & harian.</p>
+                        <div class="pt-2 flex items-center justify-between border-t border-slate-800">
+                            <div>
+                                <span class="text-xs text-slate-500 block">Harga</span>
+                                <span class="font-heading font-bold text-lg text-brand-accent">Rp 320.000</span>
+                            </div>
+                            <button onclick="orderWA('Joran Adun Rod Pro Carbon 180cm')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-brand-accent hover:text-brand-dark text-white font-semibold text-xs transition-all flex items-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4: Joran -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-brand-accent/50 transition-all duration-300" data-category="joran">
+                    <div class="h-52 bg-slate-900 relative flex items-center justify-center overflow-hidden">
+                        <img src="https://down-id.img.susercontent.com/file/id-11134207-7rasa-m41helrgjfl6f9" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1C2541/FF9F1C?text=Joran+Tegek+450cm';" alt="Joran Tegek Galatama Carbon" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent pointer-events-none"></div>
+                        <span class="absolute top-3 left-3 bg-slate-800/90 text-brand-accent text-[10px] font-mono px-2 py-0.5 rounded border border-brand-accent/30 z-10 backdrop-blur-sm">Joran</span>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <div class="flex items-center gap-1 text-amber-400 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                            <span class="text-slate-400 ml-1">(4.8)</span>
+                        </div>
+                        <h3 class="font-heading font-bold text-lg text-white group-hover:text-brand-accent transition-colors">Joran Tegek Galatama Carbon 450cm</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Tegek kaku dan ringan khusus galatama lele & bawal. Responsif saat gentak ikan besar.</p>
+                        <div class="pt-2 flex items-center justify-between border-t border-slate-800">
+                            <div>
+                                <span class="text-xs text-slate-500 block">Harga</span>
+                                <span class="font-heading font-bold text-lg text-brand-accent">Rp 215.000</span>
+                            </div>
+                            <button onclick="orderWA('Joran Tegek Galatama Carbon 450cm')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-brand-accent hover:text-brand-dark text-white font-semibold text-xs transition-all flex items-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5: Reel -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-brand-accent/50 transition-all duration-300" data-category="reel">
+                    <div class="h-52 bg-slate-900 relative flex items-center justify-center overflow-hidden">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWQ54uwFF5GNcWg-VULl2uCcFAnJHUt1Et4fUR8xhuw&s=10" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1C2541/00F5D4?text=Reel+Spinning+2000';" alt="Reel Spinning Metal Series 2000" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent pointer-events-none"></div>
+                        <span class="absolute top-3 right-3 bg-indigo-500 text-white text-xs font-bold px-2.5 py-1 rounded-full z-10">9+1 BB</span>
+                        <span class="absolute top-3 left-3 bg-slate-800/90 text-brand-accent text-[10px] font-mono px-2 py-0.5 rounded border border-brand-accent/30 z-10 backdrop-blur-sm">Reel</span>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <div class="flex items-center gap-1 text-amber-400 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="text-slate-400 ml-1">(5.0)</span>
+                        </div>
+                        <h3 class="font-heading font-bold text-lg text-white group-hover:text-brand-accent transition-colors">Reel Spinning Metal Series 2000</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Bodi aluminium anti korosi, 9+1 Ball Bearing presisi tinggi. Drag power hingga 10kg super mulus.</p>
+                        <div class="pt-2 flex items-center justify-between border-t border-slate-800">
+                            <div>
+                                <span class="text-xs text-slate-500 block">Harga</span>
+                                <span class="font-heading font-bold text-lg text-brand-accent">Rp 280.000</span>
+                            </div>
+                            <button onclick="orderWA('Reel Spinning Metal Series 2000')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-brand-accent hover:text-brand-dark text-white font-semibold text-xs transition-all flex items-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6: Reel -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-brand-accent/50 transition-all duration-300" data-category="reel">
+                    <div class="h-52 bg-slate-900 relative flex items-center justify-center overflow-hidden">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_hW6a-oG7y7mupiwQreiLOmT-o5PzsQKNuEnE3YIpgA&s=10" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1C2541/3A86FF?text=Reel+BC+Speed+Master';" alt="Reel Baitcasting Speed Master" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent pointer-events-none"></div>
+                        <span class="absolute top-3 right-3 bg-purple-500 text-white text-xs font-bold px-2.5 py-1 rounded-full z-10">HIGH SPEED</span>
+                        <span class="absolute top-3 left-3 bg-slate-800/90 text-brand-accent text-[10px] font-mono px-2 py-0.5 rounded border border-brand-accent/30 z-10 backdrop-blur-sm">Reel</span>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <div class="flex items-center gap-1 text-amber-400 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="text-slate-400 ml-1">(4.9)</span>
+                        </div>
+                        <h3 class="font-heading font-bold text-lg text-white group-hover:text-brand-accent transition-colors">Reel Baitcasting (BC) Speed Master 7.2:1</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Rasio gir tinggi 7.2:1 dengan Dual Magnetic Brake System untuk lemparan jauh & anti-backlash.</p>
+                        <div class="pt-2 flex items-center justify-between border-t border-slate-800">
+                            <div>
+                                <span class="text-xs text-slate-500 block">Harga</span>
+                                <span class="font-heading font-bold text-lg text-brand-accent">Rp 345.000</span>
+                            </div>
+                            <button onclick="orderWA('Reel Baitcasting Speed Master')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-brand-accent hover:text-brand-dark text-white font-semibold text-xs transition-all flex items-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 7: Aksesori -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-brand-accent/50 transition-all duration-300" data-category="aksesori">
+                    <div class="h-52 bg-slate-900 relative flex items-center justify-center overflow-hidden">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8EIFhspc8VZJWMtwxYn8Ae_ZcU1i4TUcggFdTyWRPYw&s=10" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1C2541/FF9F1C?text=Tackle+Box+Waterproof';" alt="Box Kail & Tackle Organizer Waterproof" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent pointer-events-none"></div>
+                        <span class="absolute top-3 left-3 bg-slate-800/90 text-brand-accent text-[10px] font-mono px-2 py-0.5 rounded border border-brand-accent/30 z-10 backdrop-blur-sm">Aksesori</span>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <div class="flex items-center gap-1 text-amber-400 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="text-slate-400 ml-1">(4.8)</span>
+                        </div>
+                        <h3 class="font-heading font-bold text-lg text-white group-hover:text-brand-accent transition-colors">Box Kail & Tackle Organizer Waterproof</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Kotak aksesoris tahan air dengan sekat dinamis untuk kail, pelampung, swivel, dan timah.</p>
+                        <div class="pt-2 flex items-center justify-between border-t border-slate-800">
+                            <div>
+                                <span class="text-xs text-slate-500 block">Harga</span>
+                                <span class="font-heading font-bold text-lg text-brand-accent">Rp 65.000</span>
+                            </div>
+                            <button onclick="orderWA('Box Kail Tackle Waterproof')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-brand-accent hover:text-brand-dark text-white font-semibold text-xs transition-all flex items-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 8: Aksesori -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-brand-accent/50 transition-all duration-300" data-category="aksesori">
+                    <div class="h-52 bg-slate-900 relative flex items-center justify-center overflow-hidden">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI3UfZDfhMcSMOA4r4s0vTRP42amS22Z4e7IJd911LfA&s=10" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1C2541/00F5D4?text=Senar+PE+X8+Smooth';" alt="Senar Braided PE X8 Smooth" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent pointer-events-none"></div>
+                        <span class="absolute top-3 left-3 bg-slate-800/90 text-brand-accent text-[10px] font-mono px-2 py-0.5 rounded border border-brand-accent/30 z-10 backdrop-blur-sm">Aksesori</span>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <div class="flex items-center gap-1 text-amber-400 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="text-slate-400 ml-1">(4.9)</span>
+                        </div>
+                        <h3 class="font-heading font-bold text-lg text-white group-hover:text-brand-accent transition-colors">Senar Braided PE X8 Smooth 150m</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Senar PE anyam 8 benang micro fiber, tahan gesekan batu dan struktur karang. Diameter super kecil.</p>
+                        <div class="pt-2 flex items-center justify-between border-t border-slate-800">
+                            <div>
+                                <span class="text-xs text-slate-500 block">Harga</span>
+                                <span class="font-heading font-bold text-lg text-brand-accent">Rp 110.000</span>
+                            </div>
+                            <button onclick="orderWA('Senar Braided PE X8 Smooth')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-brand-accent hover:text-brand-dark text-white font-semibold text-xs transition-all flex items-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 9: Bundle -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-brand-accent/50 transition-all duration-300" data-category="aksesori">
+                    <div class="h-52 bg-slate-900 relative flex items-center justify-center overflow-hidden">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSemamGSUhTGvcjH4iLgVipeY2jTK75_uibq6eJbE7JSg&s=10" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1C2541/10B981?text=Paket+Starter+Juara';" alt="Paket Starter Pemancing Juara" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent pointer-events-none"></div>
+                        <span class="absolute top-3 right-3 bg-emerald-500 text-brand-dark text-xs font-bold px-2.5 py-1 rounded-full z-10">PAKET HEMAT</span>
+                        <span class="absolute top-3 left-3 bg-slate-800/90 text-brand-accent text-[10px] font-mono px-2 py-0.5 rounded border border-brand-accent/30 z-10 backdrop-blur-sm">Bundle</span>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <div class="flex items-center gap-1 text-amber-400 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                            <span class="text-slate-400 ml-1">(4.8)</span>
+                        </div>
+                        <h3 class="font-heading font-bold text-lg text-white group-hover:text-brand-accent transition-colors">Paket Starter Pemancing Juara</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Terdiri dari 2 Essen Oplosan, Umpan Pelampung Siap Pakai, Kail Premium Anti-Lurus, & Dompet Kail.</p>
+                        <div class="pt-2 flex items-center justify-between border-t border-slate-800">
+                            <div>
+                                <span class="text-xs text-slate-500 block">Harga Bundle</span>
+                                <span class="font-heading font-bold text-lg text-brand-accent">Rp 175.000</span>
+                            </div>
+                            <button onclick="orderWA('Paket Starter Pemancing Juara')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-brand-accent hover:text-brand-dark text-white font-semibold text-xs transition-all flex items-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH SPECS / SPESIFIKASI JURUSAN TKJ SECTION -->
+    <section id="tkj-spec" class="py-16 bg-slate-900/80 border-y border-slate-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card p-8 rounded-3xl border border-brand-accent/20 bg-gradient-to-r from-brand-dark via-slate-900 to-brand-dark">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div class="space-y-4 max-w-2xl">
+                        <div class="inline-flex items-center gap-2 text-xs font-mono font-bold text-brand-accent tracking-wider uppercase bg-brand-accent/10 px-3 py-1 rounded-md">
+                            <i class="fa-solid fa-code"></i> Powered by TKJ Networking & Web Architecture
+                        </div>
+                        <h3 class="font-heading text-2xl sm:text-3xl font-bold text-white">Dibuat dengan Standard Performa Jaringan & Web Tinggi</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Aplikasi Web Pino Mancing dioptimalkan agar tetap cepat & ringan dibuka di tempat memancing (pemancingan outdoor) bahkan saat sinyal seluler lemah (Minimal Bandwidth Usage).
+                        </p>
+                        <div class="flex flex-wrap gap-3 text-xs font-mono text-slate-300">
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700"><i class="fa-solid fa-bolt text-amber-400 mr-1"></i> Fast Load &lt; 1s</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700"><i class="fa-solid fa-mobile-screen text-brand-accent mr-1"></i> Mobile-First UI</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700"><i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i> SSL Secured</span>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-right shrink-0">
+                        <div class="w-20 h-20 mx-auto md:ml-auto rounded-2xl bg-brand-accent/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent text-3xl mb-3">
+                            <i class="fa-solid fa-server"></i>
+                        </div>
+                        <span class="text-xs text-slate-500 block">Project Portofolio</span>
+                        <span class="font-heading font-bold text-white text-sm">Siswa TKJ Indonesia</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL MEDIA SECTION -->
+    <section id="sosmed" class="py-14 bg-slate-900/60 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="text-brand-accent text-xs font-bold tracking-widest uppercase">Komunitas & Media Sosial</span>
+            <h2 class="font-heading text-2xl sm:text-3xl font-bold text-white mt-1 mb-3">Ikuti Pino Mancing di Media Sosial</h2>
+            <p class="text-slate-400 text-sm max-w-xl mx-auto mb-8">Dapatkan update resep umpan terbaru, video strike galatama, dan info promo piranti langsung melalui akun resmi kami.</p>
+            
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <!-- Instagram Card -->
+                <a href="https://www.instagram.com/alvnrdty_/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" class="glass-card px-6 py-3.5 rounded-2xl border border-pink-500/30 hover:border-pink-500 hover:bg-pink-500/10 text-white flex items-center gap-3 transition-all hover:scale-105 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 flex items-center justify-center text-white text-xl shadow-lg">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <div class="text-left">
+                        <span class="block text-[10px] text-slate-400 font-mono uppercase tracking-wider">Instagram</span>
+                        <span class="font-heading font-bold text-sm text-white group-hover:text-pink-400 transition-colors">@alvnrdty_</span>
+                    </div>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-pink-400 ml-2"></i>
+                </a>
+
+                <!-- TikTok Card -->
+                <a href="https://www.tiktok.com/@pinooasololee?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" class="glass-card px-6 py-3.5 rounded-2xl border border-cyan-500/30 hover:border-cyan-500 hover:bg-cyan-500/10 text-white flex items-center gap-3 transition-all hover:scale-105 group">
+                    <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-400/50 flex items-center justify-center text-cyan-400 text-xl shadow-lg shadow-cyan-500/20">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </div>
+                    <div class="text-left">
+                        <span class="block text-[10px] text-slate-400 font-mono uppercase tracking-wider">TikTok</span>
+                        <span class="font-heading font-bold text-sm text-white group-hover:text-cyan-400 transition-colors">@pinooasololee</span>
+                    </div>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-cyan-400 ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-auto py-10 bg-brand-dark text-slate-500 text-xs border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+                <span class="font-bold text-white">Web Pino Mancing</span> &copy; 2026. Hak Cipta Dilindungi.
+            </div>
+            <div class="flex gap-6 text-slate-400">
+                <a href="https://www.instagram.com/alvnrdty_/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" class="hover:text-brand-accent transition-colors" title="Instagram @alvnrdty_"><i class="fa-brands fa-instagram text-base"></i></a>
+                <a href="https://www.tiktok.com/@pinooasololee?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" class="hover:text-brand-accent transition-colors" title="TikTok @pinooasololee"><i class="fa-brands fa-tiktok text-base"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPT -->
+    <script>
+        const recipes = {
+            mas: {
+                title: "Racikan Umpan Ikan Mas Galatama & Harian",
+                ingredients: [
+                    "1 Bungkus Tepung Katulampa",
+                    "2 Butir Telur Bebek (Kuningnya saja)",
+                    "1 Kaleng Deho/Sarden Halus",
+                    "5-8 Tetes Essen Oplosan Pino Amis Gurih",
+                    "Kroto Segar secukupnya"
+                ],
+                steps: "Campurkan tepung katulampa dan kuning telur bebek hingga merata. Masukkan deho halus, lalu tambahkan 5-8 tetes Essen Oplosan Pino. Kukus selama 15 menit, dan taburkan kroto segar sebelum digunakan."
+            },
+            lele: {
+                title: "Racikan Umpan Galatama Lele Malam Hari",
+                ingredients: [
+                    "1/2 kg Daging Giling Segar / Hati Ayam",
+                    "1 Butir Telur Asin",
+                    "10 Tetes Essen Oplosan Darah Salmon",
+                    "Cacing Lur secukupnya"
+                ],
+                steps: "Aduk daging giling bersama telur asin hingga kalis. Teteskan Essen Darah Salmon secara merata. Gunakan cacing lur sebagai media cocolan umpan di kail."
+            },
+            bawal: {
+                title: "Racikan Umpan Bawal Siang Hari",
+                ingredients: [
+                    "2 Bungkusan Kacang Mede Sangrai Halus",
+                    "1 Sachet Susu Dancow",
+                    "5 Tetes Essen Aroma Buah (Nangka/Durian)",
+                    "Minyak samin secukupnya"
+                ],
+                steps: "Campur kacang mede halus dan susu Dancow. Tambahkan sedikit air hangat dan minyak samin sampai adonan bisa dipulung. Teteskan essen buah untuk meningkatkan aroma."
+            },
+            patin: {
+                title: "Racikan Umpan Patin Kolam Air Hijau",
+                ingredients: [
+                    "5 Lembar Roti Tawar (Buang pinggirnya)",
+                    "1 Sachet Santan Kara",
+                    "6 Tetes Essen Oplosan Pandan Pasta",
+                    "Air hangat secukupnya"
+                ],
+                steps: "Haluskan roti tawar bersama santan kara hingga menjadi adonan lembut. Tambahkan essen pandan pasta hingga warnanya sedikit kehijauan. Umpan siap dilemparkan."
+            }
+        };
+
+        function switchTab(type) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-brand-accent', 'text-brand-accent', 'shadow-lg');
+                btn.classList.add('text-slate-400');
+            });
+            const activeBtn = document.getElementById('tab-' + type);
+            if(activeBtn) {
+                activeBtn.classList.add('border-brand-accent', 'text-brand-accent', 'shadow-lg');
+                activeBtn.classList.remove('text-slate-400');
+            }
+
+            const data = recipes[type];
+            const contentDiv = document.getElementById('recipe-content');
+            
+            if (contentDiv && data) {
+                contentDiv.innerHTML = `
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                            <h3 class="font-heading text-xl sm:text-2xl font-bold text-white flex items-center gap-3">
+                                <span class="w-3 h-3 rounded-full bg-brand-accent"></span>
+                                ${data.title}
+                            </h3>
+                            <span class="text-xs bg-brand-accent/10 text-brand-accent font-semibold px-3 py-1 rounded-full border border-brand-accent/20">Akurat & Teruji</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-3">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-brand-amber flex items-center gap-2">
+                                    <i class="fa-solid fa-list-check"></i> Bahan-Bahan Utama:
+                                </h4>
+                                <ul class="space-y-2 text-sm text-slate-300">
+                                    ${data.ingredients.map(ing => `<li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-accent text-xs"></i> ${ing}</li>`).join('')}
+                                </ul>
+                            </div>
+
+                            <div class="space-y-3">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-brand-blue flex items-center gap-2">
+                                    <i class="fa-solid fa-mortar-pestle"></i> Cara Pembuatan:
+                                </h4>
+                                <p class="text-sm text-slate-300 leading-relaxed bg-slate-900/60 p-4 rounded-2xl border border-slate-800">
+                                    ${data.steps}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function filterProducts(category, event) {
+            const cards = document.querySelectorAll('.product-card');
+            const btns = document.querySelectorAll('.prod-tab-btn');
+            
+            btns.forEach(btn => {
+                btn.classList.remove('bg-brand-accent', 'text-brand-dark', 'shadow-lg');
+                btn.classList.add('bg-slate-800', 'text-slate-300');
+            });
+
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('bg-brand-accent', 'text-brand-dark', 'shadow-lg');
+                event.currentTarget.classList.remove('bg-slate-800', 'text-slate-300');
+            }
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        window.onload = function() {
+            switchTab('mas');
+            
+            const menuBtn = document.getElementById('menuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        };
+
+        function orderWA(productName) {
+            const phone = "6283164451618";
+            const text = encodeURIComponent(`Halo Pino Mancing, saya ingin memesan: ${productName}. Mohon informasi ketersediaan stok.`);
+            window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+        }
+    </script>
+</body>
+</html>
